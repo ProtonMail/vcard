@@ -15,13 +15,18 @@
             key,
             value,
             meta,
-            namespace;
+            namespace,
+            contactNum = 0;
 
         for (var i = 0; i < count; i++) {
             if (lines[i] == '') {
                 continue;
             }
-            if (lines[i].toUpperCase() == PREFIX || lines[i].toUpperCase() == POSTFIX) {
+            if (lines[i].toUpperCase() == PREFIX) {
+                contactNum++;
+                continue;
+            }
+            if (lines[i].toUpperCase() == POSTFIX) {
                 continue;
             }
             pieces = lines[i].split(':');
@@ -107,14 +112,16 @@
                 key = key.toLowerCase();
             }
 
-            if (typeof result[key] === 'undefined') {
-                result[key] = [newValue];
+            var obj = {};
+            if (typeof result[contactNum] === 'undefined') {
+                obj[key] = newValue;
+                result[contactNum] = obj;
             } else {
-                result[key].push(newValue);
+                obj[key] = newValue;
+                result[contactNum][key] = newValue;
             }
 
         }
-
         return result;
     }
 
