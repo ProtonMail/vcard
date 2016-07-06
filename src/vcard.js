@@ -18,6 +18,13 @@
             namespace,
             contactNum = 0;
 
+        function extend(target, source) {
+            Object.getOwnPropertyNames(source).forEach(function(key) {
+                Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+            })
+            return target
+        }
+
         for (var i = 0; i < count; i++) {
             if (lines[i] == '') {
                 continue;
@@ -63,7 +70,7 @@
                 key = metaArr.shift();
                 metaArr.forEach(function (item) {
                     var arr = item.split('=');
-                    arr[0] = arr[0].toLowerCase();
+                    arr[0] = arr[0].charAt(0).toUpperCase() + arr[0].slice(1).toLowerCase();
                     if (meta[arr[0]]) {
                         meta[arr[0]].push(arr[1]);
                     } else {
@@ -98,18 +105,16 @@
                 namespace = arr[0];
             }
 
-            var newValue = {
-                value: value
-            };
+            key = key.charAt(0).toUpperCase() + key.slice(1).toLowerCase();           
+            console.log(key);
+            var newValue = {};
+            newValue[key] = value;
+
             if (Object.keys(meta).length) {
-                newValue.meta = meta;
+                newValue = extend(meta,newValue);
             }
             if (namespace) {
                 newValue.namespace = namespace;
-            }
-
-            if (key.indexOf('X-') !== 0) {
-                key = key.toLowerCase();
             }
 
             var obj = {};
