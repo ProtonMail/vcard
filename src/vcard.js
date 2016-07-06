@@ -117,8 +117,11 @@
                 obj[key] = newValue;
                 result[contactNum] = obj;
             } else {
+                if(typeof result[contactNum][key] === 'undefined'){
+                    result[contactNum][key] = [];
+                }
                 obj[key] = newValue;
-                result[contactNum][key] = newValue;
+                result[contactNum][key].push(newValue);
             }
 
         }
