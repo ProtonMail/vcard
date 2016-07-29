@@ -105,8 +105,7 @@
                 namespace = arr[0];
             }
 
-            key = key.charAt(0).toUpperCase() + key.slice(1).toLowerCase();           
-            console.log(key);
+            key = key.charAt(0).toUpperCase() + key.slice(1).toLowerCase();
             var newValue = {};
             newValue[key] = value;
 
