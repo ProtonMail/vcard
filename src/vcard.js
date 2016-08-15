@@ -107,6 +107,12 @@
 
             key = key.charAt(0).toUpperCase() + key.slice(1).toLowerCase();
             var newValue = {};
+
+            // remove empty values
+            if(value instanceof Array) {
+                value = value.filter(Boolean);
+            }
+
             newValue[key] = value;
 
             if (Object.keys(meta).length) {
