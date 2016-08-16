@@ -119,7 +119,7 @@
                 newValue = extend(meta,newValue);
             }
             if (namespace) {
-                newValue = extend({namespace},newValue);
+                newValue.namespace = namespace;
             }
 
             var obj = {};
